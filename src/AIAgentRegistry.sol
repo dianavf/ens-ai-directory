@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import "@ensdomains/ens-contracts/contracts/registry/ENS.sol";
-import "@ensdomains/ens-contracts/contracts/resolvers/PublicResolver.sol";
+import "./interfaces/IENS.sol";
+import "./interfaces/IPublicResolver.sol";
 
 contract AIAgentRegistry {
     ENS public immutable ens;
