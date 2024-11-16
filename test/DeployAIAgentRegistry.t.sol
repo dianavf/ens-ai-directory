@@ -10,8 +10,8 @@ contract DeployAIAgentRegistry is Script {
         address ensAddress = 0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e;
         // Sepolia Public Resolver address
         address resolverAddress = 0x8FADE66B79cC9f707aB26799354482EB93a5B7dD;
-        // domain's namehash
-        bytes32 domainNode = 0x9062c0ac1a5e4ca0b3cb8e6d78ef8d5c7adb17300504a272f908a4c7aa73d666;
+        // aiagent.eth namehash
+        bytes32 domainNode = 0x5a1a1c7f17cd18a9c96fc3e4ab5b3bcfbaf2c079c1c0355ff0c4b24838d65e59;
         
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         

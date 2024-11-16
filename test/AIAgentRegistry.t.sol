@@ -10,17 +10,17 @@ contract AIAgentRegistryTest is Test {
     AIAgentRegistry public registry;
     mockENS public ens;
     mockResolver public resolver;
-    address public owner = address(this);
+    address public owner = 0x6F841f1e580B40C1f716a2d3f7b7A38c3f2684d6;
     address public user1 = address(0x1);
-    bytes32 public constant TEST_DOMAIN = bytes32(uint256(0x1));
+    bytes32 public constant TEST_DOMAIN = 0x5a1a1c7f17cd18a9c96fc3e4ab5b3bcfbaf2c079c1c0355ff0c4b24838d65e59;
 
     function setUp() public {
-        // Deploy mock contracts
+        // for local testing, deploy mock contracts
         ens = new mockENS();
         resolver = new mockResolver();
         
         // Set test domain owner
-        ens.setOwner(TEST_DOMAIN, address(this));
+        ens.setOwner(TEST_DOMAIN, owner);
         
         // Deploy the registry
         registry = new AIAgentRegistry(
@@ -30,7 +30,7 @@ contract AIAgentRegistryTest is Test {
         );
         
         // Label addresses for better trace output
-        vm.label(address(this), "Owner");
+        vm.label(owner, "Owner");
         vm.label(user1, "User1");
         vm.label(address(registry), "Registry");
     }

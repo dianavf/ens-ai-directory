@@ -5,8 +5,8 @@ import "./interfaces/IENS.sol";
 import "./interfaces/IPublicResolver.sol";
 
 contract AIAgentRegistry {
-    ENS public immutable ens;
-    PublicResolver public immutable resolver;
+    IENS public immutable ens;
+    IPublicResolver public immutable resolver;
     bytes32 public immutable domain;  // Add this to store your domain's namehash
 
     // Events
@@ -26,19 +26,14 @@ contract AIAgentRegistry {
     constructor(
         address ensAddress, 
         address resolverAddress,
-        bytes32 _domain  // Add parameter for your domain's namehash
+        bytes32 _domain
     ) {
         require(ensAddress != address(0), "Invalid ENS address");
         require(resolverAddress != address(0), "Invalid resolver address");
         
-        ens = ENS(ensAddress);
-        resolver = PublicResolver(resolverAddress);
+        ens = IENS(ensAddress);
+        resolver = IPublicResolver(resolverAddress);
         domain = _domain;
-
-        // Make sure the deployer owns the domain
-        if (ens.owner(domain) != msg.sender) {
-            revert NotDomainOwner();
-        }
     }
 
     /// @notice Register a new AI agent with associated metadata
@@ -59,22 +54,36 @@ contract AIAgentRegistry {
         bytes32 fullNode = keccak256(abi.encodePacked(domain, label));
 
         // Check availability
-        if (ens.owner(fullNode) != address(0)) {
+        address currentOwner = ens.owner(fullNode);
+        if (currentOwner != address(0)) {
             revert SubnameAlreadyRegistered(name);
         }
 
-        // Register the subname
-        ens.setSubnodeOwner(domain, label, msg.sender);
+        // Check if contract has permission
+        address domainOwner = ens.owner(domain);
+        require(domainOwner != address(0), "Domain not found");
+        
+        // First set approval for the registry contract
+        require(ens.isApprovedForAll(msg.sender, address(this)), "Contract not approved");
+        
+        // Then create the subnode directly
+        ens.setSubnodeRecord(
+            domain,
+            label,
+            msg.sender,
+            address(resolver),
+            0
+        );
 
         // Set metadata
         resolver.setText(fullNode, "agentMetadata", agentMetadata);
 
-        // Emit event
-        emit AIAgentRegistered(msg.sender, name, fullNode, agentMetadata);
+            // Emit event
+            emit AIAgentRegistered(msg.sender, name, fullNode, agentMetadata);
         return fullNode;
     }
+           
 
-    // Rest of your code remains the same, but use 'domain' instead of 'rootNode'
     function updateAgentMetadata(
         string memory name,
         string memory newMetadata
