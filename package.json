@@ -1,0 +1,35 @@
+{
+  "name": "ens-ai-directory",
+  "version": "1.0.0",
+  "description": "A platform for registering and discovering AI agents using ENS (Ethereum Name Service) identities. Built for ETHGlobal Hackathon.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ensdomains/ens-contracts": "^1.2.2",
+    "@ensdomains/ensjs": "^4.0.2",
+    "@openzeppelin/contracts": "^5.1.0",
+    "ethers": "^6.13.4",
+    "next": "^15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "wagmi": "^2.12.33"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-class-properties": "^7.25.9",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.25.9",
+    "@babel/plugin-transform-optional-chaining": "^7.25.9",
+    "autoprefixer": "^10.4.20",
+    "glob": "^11.0.0",
+    "postcss": "^8.4.49",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^3.4.15"
+  }
+}
