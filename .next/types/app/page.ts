@@ -1,4 +1,4 @@
-// File: /Users/diana/ens-ai-directory/ens-ai-directory/src/app/page.js
+// File: /Users/diana/ens-ai-directory/src/app/page.js
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
