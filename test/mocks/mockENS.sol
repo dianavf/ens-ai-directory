@@ -32,8 +32,8 @@ contract mockENS is ENS {
     function setRecord(
         bytes32 node,
         address owner_,
-        address resolver_,
-        uint64 ttlValue
+        address, 
+        uint64 
     ) public override {
         owners[node] = owner_;
     }
@@ -42,8 +42,8 @@ contract mockENS is ENS {
         bytes32 node,
         bytes32 label,
         address owner_,
-        address resolver_,
-        uint64 ttlValue
+        address, 
+        uint64  
     ) public override {
         bytes32 subnode = keccak256(abi.encodePacked(node, label));
         owners[subnode] = owner_;
@@ -57,15 +57,15 @@ contract mockENS is ENS {
         return operators[owner_][operator];
     }
 
-    function ttl(bytes32 node) public view override returns(uint64) {
+    function ttl(bytes32) public pure override returns(uint64) {
         return 0;
     }
 
-    function resolver(bytes32 node) public view override returns(address) {
+    function resolver(bytes32) public pure override returns(address) {
         return address(0);
     }
 
-    function recordExists(bytes32 node) public pure override returns(bool) {
+    function recordExists(bytes32) public pure override returns(bool) {
         return true;
     }
 }

@@ -1,6 +1,23 @@
 [profile.default]
-src = "src"
+src = "contracts"     # Changed from "src" to "contracts" since sol files are here
 out = "out"
 libs = ["lib"]
+test = "contracts/test"     # Updated test path
+script = "contracts/script"  # Updated script path
+solc_version = "0.8.28"
+
+# Remappings
+remappings = [
+    '@ensdomains/=lib/ens-contracts/',
+    '@openzeppelin/=lib/openzeppelin-contracts/',
+    'forge-std/=lib/forge-std/src/'
+]
+
+# Add Sepolia configuration
+[rpc_endpoints]
+sepolia = "${https://eth-sepolia.g.alchemy.com/v2/demo}"
+
+[etherscan]
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
